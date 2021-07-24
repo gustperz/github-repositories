@@ -21,4 +21,8 @@
   .actions {
     @apply flex items-center justify-between gap-2 mt-8;
   }
+
+  .error {
+    @apply w-full text-center text-red-500 -mt-4 mb-4;
+  }
 }

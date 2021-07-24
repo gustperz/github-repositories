@@ -9,8 +9,8 @@ import SignUp from './pages/sign-up';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
+      <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/">
             <Repos />
@@ -22,8 +22,8 @@ function App() {
             <SignUp />
           </Route>
         </Switch>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

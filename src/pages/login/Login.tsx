@@ -1,12 +1,36 @@
-import React from 'react';
-
-import styles from './Login.module.scss';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import styles from './Login.module.scss';
+import useLogin, { Credentials } from './useLogin';
 
 export default function Login() {
   const history = useHistory();
+  const [error, setError] = useState<string>();
+
+  const { login } = useLogin();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: inputsErrors, isValidating },
+  } = useForm<Credentials>();
+
+  useEffect(() => {
+    setError(undefined);
+  }, [isValidating]);
+
+  const onSubmit = async (data: Credentials) => {
+    try {
+      login(data);
+      history.push('/');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -14,27 +38,32 @@ export default function Login() {
         <div className={styles.loginBox}>
           <h2>Login</h2>
 
-          <form method="POST">
+          {!!error && <h4 className={styles.error}>{error}</h4>}
+
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Input
-              id="email"
+              {...register('email', {
+                pattern: /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/,
+                required: true,
+              })}
               type="email"
-              name="email"
               placeholder="email"
               autoComplete="email"
-              required
+              invalid={!!inputsErrors.email}
             />
 
             <Input
-              id="password"
+              {...register('password', {
+                required: true,
+              })}
               type="password"
-              name="password"
               placeholder="password"
               autoComplete="current-password"
-              required
+              invalid={!!inputsErrors.password}
             />
 
             <div className={styles.actions}>
-              <Button text="Login" raised />
+              <Button text="Login" raised type="submit" />
               <Button text="Sign Up" onClick={() => history.push('/sign-up')} />
             </div>
           </form>

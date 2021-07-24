@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
-import styles from './SignUp.module.scss';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import styles from './SignUp.module.scss';
+import useSignUp, { SignUpData } from './useSignUp';
+
+interface Inputs extends SignUpData {
+  confirmPassword: string;
+}
 
 export default function SignUp() {
   const history = useHistory();
+  const [error, setError] = useState<string>();
+
+  const { signUp } = useSignUp();
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors: inputsErrors, isValidating },
+  } = useForm<Inputs>();
+
+  useEffect(() => {
+    setError(undefined);
+  }, [isValidating]);
+
+  const onSubmit = async (data: Inputs) => {
+    try {
+      signUp(data);
+      history.push('/');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -14,38 +43,54 @@ export default function SignUp() {
         <div className={styles.loginBox}>
           <h2>Sing Up</h2>
 
-          <form method="POST">
-            <Input id="firstName" name="firstName" placeholder="first name" required />
-            <Input id="lastName" name="lastName" placeholder="last name" required />
+          {!!error && <h4 className={styles.error}>{error}</h4>}
+
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              {...register('firstName')}
+              invalid={!!inputsErrors.firstName}
+              placeholder="first name"
+              required
+            />
+            <Input
+              {...register('lastName')}
+              invalid={!!inputsErrors.lastName}
+              placeholder="last name"
+              required
+            />
 
             <Input
-              id="email"
+              {...register('email', {
+                pattern: /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/,
+              })}
               type="email"
-              name="email"
               placeholder="email"
               autoComplete="email"
               required
+              invalid={!!inputsErrors.email}
               className="mt-1"
             />
 
             <Input
-              id="password"
+              {...register('password')}
               type="password"
-              name="password"
               placeholder="password"
               required
+              invalid={!!inputsErrors.password}
               className="mt-2"
             />
             <Input
-              id="confirmPassword"
+              {...register('confirmPassword', {
+                validate: value => value === getValues('password'),
+              })}
               type="password"
-              name="password"
               placeholder="confirm password"
+              invalid={!!inputsErrors.confirmPassword}
               required
             />
 
             <div className={styles.actions}>
-              <Button text="Sign Up" raised />
+              <Button text="Sign Up" raised type="submit" />
               <Button text="Login" onClick={() => history.push('/login')} />
             </div>
           </form>
