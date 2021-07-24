@@ -1,0 +1,24 @@
+.wrapper {
+  @apply flex flex-col h-screen bg-gray-100;
+}
+
+.container {
+  @apply grid place-items-center mx-2 my-20 sm:my-auto;
+}
+
+.loginBox {
+  @apply w-11/12 p-12 sm:max-w-md;
+  @apply px-6 py-10 sm:px-10 sm:py-6 bg-white rounded-lg shadow-md lg:shadow-lg;
+
+  h2 {
+    @apply text-center font-semibold text-3xl lg:text-4xl text-gray-800 mb-10;
+  }
+
+  form {
+    @apply flex flex-col gap-2;
+  }
+
+  .actions {
+    @apply flex items-center justify-between gap-2 mt-8;
+  }
+}
