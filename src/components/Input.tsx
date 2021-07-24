@@ -2,13 +2,19 @@ import React, { InputHTMLAttributes } from 'react';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: 'text' | 'email' | 'password';
+  invalid?: boolean;
 }
 
-export default function Input({ className, type = 'text', ...props }: InputProps) {
-  return (
-    <input
-      type={type}
-      className={`
+const vorderDefault = 'border-gray-100 focus:border-gray-200';
+const vorderInvalid = 'border-red-400';
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, invalid, type = 'text', ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        type={type}
+        className={`
         block
         w-full
         py-3
@@ -16,13 +22,15 @@ export default function Input({ className, type = 'text', ...props }: InputProps
         text-gray-800
         appearance-none
         border-2 rounded
-        border-gray-100
         focus:text-gray-500
         focus:outline-none
-        focus:border-gray-200
+        ${invalid ? vorderInvalid : vorderDefault}
         ${className}
       `}
-      {...props}
-    />
-  );
-}
+        {...props}
+      />
+    );
+  }
+);
+
+export default Input;
