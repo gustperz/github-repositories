@@ -10,9 +10,6 @@ import SignUp from './pages/sign-up';
 
 const client = new GraphQLClient({
   url: 'https://api.github.com/graphql',
-  headers: {
-    Authorization: 'bearer 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',
-  },
 });
 
 function App() {
@@ -21,7 +18,9 @@ function App() {
       <ClientContext.Provider value={client}>
         <AuthProvider>
           <Switch>
-            <PrivateRoute exact path="/" component={Repos} />
+            <PrivateRoute exact path="/">
+              <Repos />
+            </PrivateRoute>
             <Route path="/login" component={Login} />
             <Route path="/sign-up" component={SignUp} />
           </Switch>

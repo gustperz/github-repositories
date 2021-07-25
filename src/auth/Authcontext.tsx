@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 export interface User {
   firstName: string;
@@ -20,8 +20,30 @@ export const authContext = createContext<AuthContext>({
 export const useAuth = () => useContext(authContext);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState(true);
+  const [user, _setUser] = useState<User>();
   const isAuthenticated = !!user;
+
+  useEffect(() => {
+    const sessionUser = sessionStorage.getItem('user');
+
+    console.log({ sessionUser: !!sessionUser });
+
+    if (sessionUser) {
+      _setUser(JSON.parse(sessionUser));
+    }
+
+    setLoading(false);
+  }, []);
+
+  const setUser = useCallback((user: User) => {
+    _setUser(user);
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }, []);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <authContext.Provider value={{ user, setUser, isAuthenticated }}>
