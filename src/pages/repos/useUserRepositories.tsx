@@ -1,11 +1,14 @@
-import { useQuery } from 'graphql-hooks';
-import { useCallback, useState } from 'react';
+import { APIError, ClientContext, useManualQuery } from 'graphql-hooks';
+import { useCallback, useContext, useEffect, useState } from 'react';
+
+import { Viewer } from './types';
 
 const QUERY = `
 query repositories($cursor: String) { 
   viewer {
     id
-    repositories(first: 10, after: $cursor) {
+    login
+    repositories(first: 100, after: $cursor) {
   		nodes {
         createdAt
         description
@@ -27,32 +30,6 @@ query repositories($cursor: String) {
 }
 `;
 
-export interface Repository {
-  createdAt: Date;
-  description: string;
-  id: string;
-  name: string;
-  primaryLanguage: {
-    name: string;
-    color: string;
-  };
-  stargazerCount: number;
-  url: string;
-}
-
-export interface Repositories {
-  nodes: Repository[];
-  pageInfo: {
-    endCursor: string;
-    hasNextPage: boolean;
-  };
-}
-
-export interface Viewer {
-  id: string;
-  repositories: Repositories;
-}
-
 interface QueryData {
   viewer: Viewer;
 }
@@ -70,13 +47,34 @@ const updateData = (prevData: QueryData, data: QueryData): QueryData => {
   };
 };
 
+const parseError = (error: APIError) => {
+  if (error.httpError) {
+    const { body } = error.httpError;
+    return JSON.parse(body).message;
+  } else if (error.graphQLErrors) {
+    return 'Unexpected error';
+  } else if (error.fetchError) {
+    return error.fetchError.message;
+  }
+};
+
+const INITIAL_TOKEN = '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';
+
 export default function useUserRepositories() {
   const [cursor, setCursor] = useState<string>();
+  const [token, setToken] = useState(INITIAL_TOKEN);
 
-  const { loading, error, data } = useQuery<QueryData>(QUERY, {
+  const [fetchUser, { loading, error, data }] = useManualQuery<QueryData>(QUERY, {
     variables: { cursor },
     updateData,
   });
+
+  const client = useContext(ClientContext);
+
+  useEffect(() => {
+    client.setHeader('Authorization', `bearer ${token}`);
+    fetchUser();
+  }, [client, fetchUser, token]);
 
   const repositories = data?.viewer.repositories.nodes ?? [];
   const pageInfo = data?.viewer.repositories.pageInfo;
@@ -90,8 +88,13 @@ export default function useUserRepositories() {
   }, [pageInfo, loading]);
 
   return {
+    user: data?.viewer.login,
     repositories,
     hasNextPage: !!pageInfo?.hasNextPage,
+    loading,
     loadingMore,
+    token,
+    setToken,
+    error: error ? parseError(error) : undefined,
   };
 }

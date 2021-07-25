@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './RepositoryCard.module.scss';
-import { Repository } from '../useUserRepositories';
+import { Repository } from '../types';
 import { ReactComponent as FavoriteBorder } from './favorite_border.svg';
 import { ReactComponent as Favrite } from './favorite.svg';
 import { ReactComponent as Star } from './star.svg';

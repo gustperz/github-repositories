@@ -1,0 +1,23 @@
+.tokenForm {
+  @apply mb-8;
+
+  h3 {
+    @apply font-bold mb-1 text-gray-600 ml-1;
+  }
+}
+
+.token {
+  @apply w-full inline-flex;
+
+  input {
+    @apply bg-gray-200 bg-opacity-50 text-gray-500 focus:bg-white;
+  }
+
+  button {
+    @apply w-16 text-gray-500;
+
+    svg {
+      @apply fill-current;
+    }
+  }
+}

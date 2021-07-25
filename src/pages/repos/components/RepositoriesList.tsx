@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './RepositoriesList.module.scss';
-import { Repository } from '../useUserRepositories';
+import { Repository } from '../types';
 import RepositoryCard from './RepositoryCard';
 
 export interface RepositoriesListProps {
