@@ -1,0 +1,7 @@
+.pageContainer {
+  @apply container mx-auto p-4;
+}
+
+.repositoriesList {
+  @apply flex flex-col place-content-stretch gap-5 max-w-screen-lg mx-auto;
+}

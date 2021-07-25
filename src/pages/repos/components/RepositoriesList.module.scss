@@ -1,0 +1,7 @@
+.repositoriesList {
+  @apply flex flex-col place-content-stretch gap-5 max-w-screen-lg mx-auto;
+}
+
+.loadingMore {
+  @apply text-center text-gray-400;
+}

@@ -31,7 +31,8 @@ export default function SignUp() {
   const onSubmit = async (data: Inputs) => {
     try {
       signUp(data);
-      history.push('/');
+      alert('Successful registration you can now login');
+      history.push('/login');
     } catch (error) {
       setError(error.message);
     }

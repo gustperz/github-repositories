@@ -1,7 +1,5 @@
 import { useCallback } from 'react';
 
-import { useAuth } from './../../auth/Authcontext';
-
 export interface SignUpData {
   firstName: string;
   lastName: string;
@@ -10,21 +8,13 @@ export interface SignUpData {
 }
 
 export default function useSignUp() {
-  const { setUser } = useAuth();
+  const signUp = useCallback((data: SignUpData) => {
+    if (localStorage.getItem(`user:${data.email}`)) {
+      throw new Error('The email is already registered');
+    }
 
-  const signUp = useCallback(
-    (data: SignUpData) => {
-      if (localStorage.getItem(`user:${data.email}`)) {
-        throw new Error('The email is already registered');
-      }
-
-      localStorage.setItem(`user:${data.email}`, JSON.stringify(data));
-
-      const { email, firstName, lastName } = data;
-      setUser({ email, firstName, lastName });
-    },
-    [setUser]
-  );
+    localStorage.setItem(`user:${data.email}`, JSON.stringify(data));
+  }, []);
 
   return { signUp };
 }
