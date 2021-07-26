@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
 
 import { AuthProvider } from './auth/Authcontext';
@@ -15,7 +15,7 @@ const client = new GraphQLClient({
 
 function App() {
   return (
-    <Router>
+    <Router basename="/github-repositories">
       <RecoilRoot>
         <ClientContext.Provider value={client}>
           <AuthProvider>

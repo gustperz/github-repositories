@@ -6,12 +6,12 @@ import { ReactComponent as Key } from './key.svg';
 import styles from './TokenForm.module.scss';
 
 export interface TokenFormProps {
-  token: string;
+  token?: string;
   loading: boolean;
   setToken: (token: string) => void;
 }
 
-export default function TokenForm({ token, setToken, loading }: TokenFormProps) {
+export default function TokenForm({ token = '', setToken, loading }: TokenFormProps) {
   const [myToken, setMyToken] = useState(token);
 
   return (
