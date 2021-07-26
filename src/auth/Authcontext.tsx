@@ -10,11 +10,13 @@ export interface AuthContext {
   user?: User;
   isAuthenticated: boolean;
   setUser: (user: User) => void;
+  logout: () => void;
 }
 
 export const authContext = createContext<AuthContext>({
   isAuthenticated: true,
   setUser: (user: User) => {},
+  logout: () => {},
 });
 
 export const useAuth = () => useContext(authContext);
@@ -41,12 +43,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     sessionStorage.setItem('user', JSON.stringify(user));
   }, []);
 
+  const logout = useCallback(() => {
+    sessionStorage.clear();
+    _setUser(undefined);
+  }, []);
+
   if (loading) {
     return null;
   }
 
   return (
-    <authContext.Provider value={{ user, setUser, isAuthenticated }}>
+    <authContext.Provider value={{ user, setUser, logout, isAuthenticated }}>
       {children}
     </authContext.Provider>
   );
