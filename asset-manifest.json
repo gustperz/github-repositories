@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/github-repositories/static/css/main.cef33456.chunk.css",
-    "main.js": "/github-repositories/static/js/main.60cc95cd.chunk.js",
-    "main.js.map": "/github-repositories/static/js/main.60cc95cd.chunk.js.map",
-    "runtime-main.js": "/github-repositories/static/js/runtime-main.34f34848.js",
-    "runtime-main.js.map": "/github-repositories/static/js/runtime-main.34f34848.js.map",
-    "static/js/2.0b2b43f9.chunk.js": "/github-repositories/static/js/2.0b2b43f9.chunk.js",
-    "static/js/2.0b2b43f9.chunk.js.map": "/github-repositories/static/js/2.0b2b43f9.chunk.js.map",
-    "static/js/3.6f519162.chunk.js": "/github-repositories/static/js/3.6f519162.chunk.js",
-    "static/js/3.6f519162.chunk.js.map": "/github-repositories/static/js/3.6f519162.chunk.js.map",
+    "main.js": "/github-repositories/static/js/main.cc4b79ab.chunk.js",
+    "main.js.map": "/github-repositories/static/js/main.cc4b79ab.chunk.js.map",
+    "runtime-main.js": "/github-repositories/static/js/runtime-main.78fda482.js",
+    "runtime-main.js.map": "/github-repositories/static/js/runtime-main.78fda482.js.map",
+    "static/js/2.6c269f31.chunk.js": "/github-repositories/static/js/2.6c269f31.chunk.js",
+    "static/js/2.6c269f31.chunk.js.map": "/github-repositories/static/js/2.6c269f31.chunk.js.map",
+    "static/js/3.e8beb349.chunk.js": "/github-repositories/static/js/3.e8beb349.chunk.js",
+    "static/js/3.e8beb349.chunk.js.map": "/github-repositories/static/js/3.e8beb349.chunk.js.map",
     "index.html": "/github-repositories/index.html",
     "static/css/main.cef33456.chunk.css.map": "/github-repositories/static/css/main.cef33456.chunk.css.map",
-    "static/js/2.0b2b43f9.chunk.js.LICENSE.txt": "/github-repositories/static/js/2.0b2b43f9.chunk.js.LICENSE.txt",
+    "static/js/2.6c269f31.chunk.js.LICENSE.txt": "/github-repositories/static/js/2.6c269f31.chunk.js.LICENSE.txt",
     "static/media/favorite.64095088.svg": "/github-repositories/static/media/favorite.64095088.svg",
     "static/media/favorite_border.257986cb.svg": "/github-repositories/static/media/favorite_border.257986cb.svg",
     "static/media/key.5226f1f6.svg": "/github-repositories/static/media/key.5226f1f6.svg",
     "static/media/star.68d615c8.svg": "/github-repositories/static/media/star.68d615c8.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.34f34848.js",
-    "static/js/2.0b2b43f9.chunk.js",
+    "static/js/runtime-main.78fda482.js",
+    "static/js/2.6c269f31.chunk.js",
     "static/css/main.cef33456.chunk.css",
-    "static/js/main.60cc95cd.chunk.js"
+    "static/js/main.cc4b79ab.chunk.js"
   ]
 }
