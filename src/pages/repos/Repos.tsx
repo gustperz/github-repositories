@@ -1,16 +1,24 @@
 import React from 'react';
 
 import styles from './Repos.module.scss';
-import useUserRepositories from './useUserRepositories';
-import RepositoriesList from './components/RepositoriesList';
 import LoadingFrame from './components/LoadingFrame';
 import TokenForm from './components/TokenForm';
+import Button from '../../components/Button';
+import useToken from './hooks/useToken';
+import useRepositories from './hooks/useRepositories';
+import useFavorites from './hooks/useFavorites';
+import RepositoryCard from './components/RepositoryCard';
 
 export default function Repos() {
-  const { repositories, hasNextPage, loading, loadingMore, token, setToken, user, error } =
-    useUserRepositories();
-
-  console.log(error);
+  const { token, setToken } = useToken();
+  const { repositories, user, error, loading } = useRepositories();
+  const {
+    filterFavorites,
+    toggleFilterFavorites,
+    isFavorite,
+    toggleFavoriteRepository,
+    hasFavorites,
+  } = useFavorites();
 
   return (
     <div className={styles.pageContainer}>
@@ -22,13 +30,26 @@ export default function Repos() {
         <h2 className={styles.error}>{error}</h2>
       ) : (
         <>
-          <h2 className={styles.userLabel}>{user}'s repositories</h2>
+          <div className={styles.listTop}>
+            <h2 className={styles.userLabel}>{user}'s repositories</h2>
 
-          <RepositoriesList
-            data={repositories}
-            endReached={loadingMore}
-            hasNextPage={hasNextPage}
-          />
+            {hasFavorites && (
+              <Button onClick={toggleFilterFavorites} className={styles.filterFavorites} raised>
+                {filterFavorites ? 'Show all' : 'Filter favorites'}
+              </Button>
+            )}
+          </div>
+
+          <div className={styles.repositoriesList}>
+            {repositories.map(repo => (
+              <RepositoryCard
+                key={repo.id}
+                data={repo}
+                isFavorite={isFavorite(repo.id)}
+                onFavoriteClick={() => toggleFavoriteRepository(repo.id)}
+              />
+            ))}
+          </div>
         </>
       )}
     </div>

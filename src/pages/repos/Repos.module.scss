@@ -3,9 +3,21 @@
 }
 
 .userLabel {
-  @apply font-bold text-lg mb-4 text-gray-600 ml-1;
+  @apply font-bold text-lg text-gray-600 ml-1;
 }
 
 .error {
   @apply border rounded border-red-500 bg-red-300 p-2 text-red-900 font-bold;
+}
+
+.repositoriesList {
+  @apply flex flex-col place-content-stretch gap-5 max-w-screen-lg mx-auto;
+}
+
+.listTop {
+  @apply flex justify-between mb-4;
+}
+
+.filterFavorites {
+  @apply w-48;
 }

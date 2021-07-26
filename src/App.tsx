@@ -7,6 +7,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/login';
 import Repos from './pages/repos';
 import SignUp from './pages/sign-up';
+import { RecoilRoot } from 'recoil';
 
 const client = new GraphQLClient({
   url: 'https://api.github.com/graphql',
@@ -15,17 +16,19 @@ const client = new GraphQLClient({
 function App() {
   return (
     <Router>
-      <ClientContext.Provider value={client}>
-        <AuthProvider>
-          <Switch>
-            <PrivateRoute exact path="/">
-              <Repos />
-            </PrivateRoute>
-            <Route path="/login" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
-          </Switch>
-        </AuthProvider>
-      </ClientContext.Provider>
+      <RecoilRoot>
+        <ClientContext.Provider value={client}>
+          <AuthProvider>
+            <Switch>
+              <PrivateRoute exact path="/">
+                <Repos />
+              </PrivateRoute>
+              <Route path="/login" component={Login} />
+              <Route path="/sign-up" component={SignUp} />
+            </Switch>
+          </AuthProvider>
+        </ClientContext.Provider>
+      </RecoilRoot>
     </Router>
   );
 }
