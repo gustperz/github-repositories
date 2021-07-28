@@ -41,6 +41,9 @@ export default function SignUp() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
+        <small className="text-gray-500 mb-6">
+          This is a test app, login and signup are saved to local storage
+        </small>
         <div className={styles.loginBox}>
           <h2>Sing Up</h2>
 
