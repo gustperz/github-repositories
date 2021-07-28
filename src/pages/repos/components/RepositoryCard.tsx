@@ -13,12 +13,12 @@ export interface RepositoryCardProps {
 }
 
 export default function RepositoryCard({ data, isFavorite, onFavoriteClick }: RepositoryCardProps) {
-  const { name, created_at, description, language, stargazer_count, url } = data;
+  const { name, created_at, description, language, stargazer_count, svn_url } = data;
 
   return (
     <div className={styles.card}>
       <div>
-        <a className={styles.link} href={url}>
+        <a className={styles.link} href={svn_url} target="_blank" rel="noreferrer">
           {name}
         </a>
         <button className={styles.favoriteButton} onClick={onFavoriteClick}>
@@ -39,7 +39,12 @@ export default function RepositoryCard({ data, isFavorite, onFavoriteClick }: Re
             <span className={styles.languaje}>{language}</span>
           </span>
 
-          <a className={styles.stars} href={`${url}/stargazers`}>
+          <a
+            className={styles.stars}
+            href={`${svn_url}/stargazers`}
+            target="_blank"
+            rel="noreferrer"
+          >
             <Star />
             {stargazer_count}
           </a>

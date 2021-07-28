@@ -5,7 +5,7 @@ export interface Repository {
   language: string;
   name: string;
   stargazer_count: number;
-  url: string;
+  svn_url: string;
 }
 
 export interface Repositories {
