@@ -1,13 +1,10 @@
 export interface Repository {
-  createdAt: Date;
+  created_at: Date;
   description: string;
   id: string;
+  language: string;
   name: string;
-  primaryLanguage: {
-    name: string;
-    color: string;
-  };
-  stargazerCount: number;
+  stargazer_count: number;
   url: string;
 }
 

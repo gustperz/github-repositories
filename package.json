@@ -1,7 +1,7 @@
 {
   "name": "github-repos-app",
   "version": "0.1.0",
-  "homepage":"https://gustperz.github.io/github-repositories",
+  "homepage": "https://gustperz.github.io/github-repositories",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",

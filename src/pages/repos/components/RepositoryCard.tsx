@@ -13,7 +13,7 @@ export interface RepositoryCardProps {
 }
 
 export default function RepositoryCard({ data, isFavorite, onFavoriteClick }: RepositoryCardProps) {
-  const { name, createdAt, description, primaryLanguage, stargazerCount, url } = data;
+  const { name, created_at, description, language, stargazer_count, url } = data;
 
   return (
     <div className={styles.card}>
@@ -36,19 +36,15 @@ export default function RepositoryCard({ data, isFavorite, onFavoriteClick }: Re
 
         <p className={styles.details}>
           <span className="ml-0">
-            <span
-              className={styles.languajeColor}
-              style={{ backgroundColor: primaryLanguage.color }}
-            ></span>
-            <span className={styles.languaje}>{primaryLanguage.name}</span>
+            <span className={styles.languaje}>{language}</span>
           </span>
 
           <a className={styles.stars} href={`${url}/stargazers`}>
             <Star />
-            {stargazerCount}
+            {stargazer_count}
           </a>
 
-          <span className={styles.date}>{createdAt}</span>
+          <span className={styles.date}>{created_at}</span>
         </p>
       </div>
     </div>

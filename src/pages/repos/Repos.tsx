@@ -31,7 +31,7 @@ export default function Repos() {
       ) : (
         <>
           <div className={styles.listTop}>
-            <h2 className={styles.userLabel}>{user}'s repositories</h2>
+            <h2 className={styles.userLabel}>{user}'s public repositories</h2>
 
             {hasFavorites && (
               <Button onClick={toggleFilterFavorites} className={styles.filterFavorites} raised>

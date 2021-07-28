@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-const INITIAL_TOKEN = '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';
+const INITIAL_TOKEN = 'gustperz';
 
 export const userTokenState = atom({
   key: 'userTokenState',
